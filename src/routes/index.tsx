@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -189,7 +189,7 @@ function Timeline() {
     const total = endY - startY;
     // tune frequency so a full wave spans ~2 nodes
     const waves = Math.max(1.5, (nodes.length - 1) / 2);
-    const segs = 96;
+    const segs = 48; // Reduced from 96 for better performance
 
     const strand = (phase: number) => {
       let s = "";
@@ -209,7 +209,7 @@ function Timeline() {
     layoutRef.current = { ny: nodes.map((n) => n.ny), topY, botY };
 
     // Horizontal rungs: sample both strands at evenly spaced t values.
-    const rungCount = Math.max(10, nodes.length * 4);
+    const rungCount = Math.max(6, nodes.length * 2); // Reduced from nodes.length * 4
     const newRungs = [];
     for (let i = 1; i < rungCount; i++) {
       const t = i / rungCount;
@@ -243,7 +243,7 @@ function Timeline() {
     });
   };
 
-  const draw = () => {
+  const draw = useCallback(() => {
     const path = pathRef.current;
     const wrap = wrapRef.current;
     if (!path || !wrap || !pathLen) return;
@@ -264,40 +264,62 @@ function Timeline() {
     const drawn = t * pathLen;
     path.style.strokeDashoffset = `${Math.max(0, pathLen - drawn)}`;
 
-    // comet head along the path
-    if (cometRef.current && t > 0 && t < 1) {
-      const pt = path.getPointAtLength(drawn);
-      cometRef.current.setAttribute("cx", `${pt.x}`);
-      cometRef.current.setAttribute("cy", `${pt.y}`);
-      cometRef.current.setAttribute("opacity", "1");
-    } else if (cometRef.current) {
-      cometRef.current.setAttribute("opacity", "0");
+    // comet head along the path - cache calculation
+    if (cometRef.current) {
+      if (t > 0 && t < 1) {
+        const pt = path.getPointAtLength(drawn);
+        cometRef.current.setAttribute("cx", `${pt.x}`);
+        cometRef.current.setAttribute("cy", `${pt.y}`);
+        cometRef.current.setAttribute("opacity", "1");
+      } else {
+        cometRef.current.setAttribute("opacity", "0");
+      }
     }
 
     // light nodes by vertical progress
     const vertRange = botY - topY || 1;
     const vertDrawn = t * vertRange;
+    const threshold = 10;
     ny.forEach((y, i) => {
-      const reached = vertDrawn >= y - topY - 10;
-      nodeRefs.current[i]?.classList.toggle("lit", reached);
-      stepRefs.current[i]?.classList.toggle("on", reached);
+      const reached = vertDrawn >= y - topY - threshold;
+      const nodeEl = nodeRefs.current[i];
+      const stepEl = stepRefs.current[i];
+      if (nodeEl?.classList.contains("lit") !== reached) {
+        nodeEl?.classList.toggle("lit", reached);
+      }
+      if (stepEl?.classList.contains("on") !== reached) {
+        stepEl?.classList.toggle("on", reached);
+      }
     });
-  };
+  }, [pathLen]);
 
   useLayoutEffect(() => {
     build();
-    const onResize = () => build();
+    let resizeTimeout: NodeJS.Timeout;
+    const onResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => build(), 150); // Debounce resize by 150ms
+    };
     window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("resize", onResize);
+      clearTimeout(resizeTimeout);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    const onScroll = () => requestAnimationFrame(draw);
+    let animFrameId: number;
+    const onScroll = () => {
+      cancelAnimationFrame(animFrameId);
+      animFrameId = requestAnimationFrame(draw);
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathLen]);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(animFrameId);
+    };
+  }, [draw]);
 
   return (
     <section className="relative z-10 mx-auto max-w-5xl px-6 pb-40">
