@@ -45,8 +45,8 @@ const STEPS: StepDef[] = [
   {
     id: "s3",
     label: "Step 03",
-    title: "Watch progress in real time.",
-    body: "Every action streams to your dashboard with replay, logs, and live metrics.",
+    title: "Development services",
+    body: "Clean codebases that teams actually understand.",
     side: "right",
     extra: "chart",
   },
@@ -635,17 +635,11 @@ function TaskList() {
   const TOTAL = 7;
   return (
     <div className="mt-4 overflow-hidden rounded-xl border border-white/10 bg-white/[0.02]">
-      {/* hero illustration: magnifier sweeps across docs */}
       <div className="space-y-2 px-4 py-4">
-        <div className="flex items-center gap-2">
-          <span
-            className="h-2 w-2 rounded-full"
-            style={{ background: PURPLE_BRIGHT, boxShadow: `0 0 10px ${PURPLE}` }}
-          />
-          <span className="text-[11px] font-semibold tracking-wide text-white/90">
-            Research Services
-          </span>
-        </div>
+        <h3 className="text-lg font-semibold text-white">Research Services</h3>
+        <p className="text-sm leading-relaxed text-foreground/60">
+          View research as an opportunity to explore and discover new things.
+        </p>
       </div>
       <div className="search-anim relative px-4 py-6">
         <div className="search-anim-row relative mx-auto flex items-center justify-between gap-2">
@@ -811,18 +805,13 @@ function CodeBlock() {
 
   return (
     <div className="mt-4 overflow-hidden rounded-xl border border-white/10 bg-white/[0.02]">
-      {/* top: agent plan ticking through steps */}
       <div className="space-y-2 px-4 py-4">
-        <div className="flex items-center gap-2">
-          <span
-            className="h-2 w-2 rounded-full"
-            style={{ background: PURPLE_BRIGHT, boxShadow: `0 0 10px ${PURPLE}` }}
-          />
-          <span className="text-[11px] font-semibold tracking-wide text-white/90">
-            Cost Analysis
-          </span>
-        </div>
-        <div className="space-y-1.5">
+        <h3 className="text-lg font-semibold text-white">Cost analysis</h3>
+        <p className="text-sm leading-relaxed text-foreground/60">
+          Price is what you pay, Value is what you get.
+        </p>
+      </div>
+      <div className="space-y-1.5 px-4 py-4">
           {tasks.map((r, i) => {
             const done = i < completedCount;
             return (
@@ -866,8 +855,6 @@ function CodeBlock() {
             );
           })}
         </div>
-      </div>
-
       {/* bottom: looping dollars video, tinted purple to match the page */}
       <div className="relative border-t border-white/10">
         <video
@@ -919,42 +906,18 @@ function MiniChart() {
   const PURPLE = "oklch(0.78 0.25 305)";
   const PURPLE_BRIGHT = "oklch(0.95 0.15 305)";
   return (
-    <div className="mt-4 overflow-hidden rounded-xl border border-white/10 bg-white/[0.02]">
-      <div className="space-y-3 px-4 py-4">
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <span
-              className="h-2 w-2 rounded-full"
-              style={{ background: PURPLE_BRIGHT, boxShadow: `0 0 10px ${PURPLE}` }}
-            />
-            <span className="text-[11px] font-semibold tracking-wide text-white/90">
-              Live preview
-            </span>
-          </div>
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/30 px-2 py-1 text-[10px] font-semibold text-white/80">
-            <span
-              className="h-2 w-2 rounded-full animate-pulse"
-              style={{ background: "#ff6b6b", boxShadow: "0 0 8px rgba(255,107,107,0.7)" }}
-            />
-            Live
-          </span>
-        </div>
-        <p className="text-sm leading-relaxed text-foreground/60">
-          Watch the agent stream its progress in real time from the dashboard.
-        </p>
-      </div>
-      <div className="relative border-t border-white/10">
-        <video
-          src="/dollars.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="block h-48 w-full object-cover"
-          style={{
-            filter: "hue-rotate(220deg) saturate(1.4) brightness(0.85) contrast(1.05)",
-          }}
-        />
+    <div className="relative mt-4 overflow-hidden rounded-xl">
+      <video
+        src="/video-object-remover.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="block h-48 w-full object-cover"
+        style={{
+          filter: "hue-rotate(220deg) saturate(1.4) brightness(0.85) contrast(1.05)",
+        }}
+      />
         <span
           aria-hidden
           className="pointer-events-none absolute inset-0"
@@ -972,7 +935,7 @@ function MiniChart() {
             mixBlendMode: "screen",
           }}
         />
-        <div className="absolute left-3 top-3 flex h-6 items-center gap-2 rounded-full border border-white/15 bg-black/50 px-3 text-[11px] text-white/85 backdrop-blur">
+        <div className="absolute left-3 top-3 flex h-6 items-center rounded-full border border-white/15 bg-black/50 px-2 text-white/85 backdrop-blur">
           <span
             className="h-2 w-2 rounded-full animate-pulse"
             style={{
@@ -980,9 +943,8 @@ function MiniChart() {
               boxShadow: `0 0 6px ${PURPLE}`,
             }}
           />
-          Live feed
+          <span className="sr-only">Live</span>
         </div>
-      </div>
     </div>
   );
 }
