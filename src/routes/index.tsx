@@ -22,7 +22,7 @@ type StepDef = {
   title: string;
   body: string;
   side: CardSide;
-  extra: "tasks" | "code" | "chart" | "stats";
+  extra: "tasks" | "code" | "chart" | "stats" | "gif";
 };
 
 const STEPS: StepDef[] = [
@@ -53,10 +53,10 @@ const STEPS: StepDef[] = [
   {
     id: "s4",
     label: "Step 04",
-    title: "Ship results, scale on demand.",
-    body: "Export, automate, or hand off — your agents keep running 24/7 at fleet scale.",
+    title: "Testing",
+    body: "Validate Your Product.",
     side: "left",
-    extra: "stats",
+    extra: "gif",
   },
 ];
 
@@ -578,6 +578,7 @@ function Card({ step }: { step: StepDef }) {
       {step.extra === "code" && <CodeBlock />}
       {step.extra === "chart" && <MiniChart />}
       {step.extra === "stats" && <StatsGrid />}
+      {step.extra === "gif" && <GifDisplay />}
     </div>
   );
 }
@@ -969,6 +970,47 @@ function StatsGrid() {
           <div className="text-[11px] text-foreground/55">{s.l}</div>
         </div>
       ))}
+    </div>
+  );
+}
+
+function GifDisplay() {
+  const PURPLE = "oklch(0.78 0.25 305)";
+  const PURPLE_BRIGHT = "oklch(0.95 0.15 305)";
+  return (
+    <div className="relative mt-4 overflow-hidden rounded-xl border border-white/10">
+      <img
+        src="/ShineHtetAung99 - Overview.gif"
+        alt="Overview demonstration"
+        className="block h-48 w-full object-cover"
+      />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background: `linear-gradient(180deg, oklch(0.08 0.02 280 / 0.55) 0%, oklch(0.08 0.02 280 / 0.15) 35%, transparent 60%, oklch(0.45 0.3 295 / 0.35) 100%)`,
+          mixBlendMode: "multiply",
+        }}
+      />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background: `radial-gradient(ellipse at 50% 100%, ${PURPLE} 0%, transparent 55%)`,
+          opacity: 0.35,
+          mixBlendMode: "screen",
+        }}
+      />
+      <div className="absolute left-3 top-3 flex h-6 items-center rounded-full border border-white/15 bg-black/50 px-2 text-white/85 backdrop-blur">
+        <span
+          className="h-2 w-2 rounded-full animate-pulse"
+          style={{
+            background: PURPLE_BRIGHT,
+            boxShadow: `0 0 6px ${PURPLE}`,
+          }}
+        />
+        <span className="sr-only">Live</span>
+      </div>
     </div>
   );
 }
