@@ -208,6 +208,11 @@
     opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
+.tl-card.no-animate {
+  opacity: 1;
+  transform: translateY(0);
+  transition: none;
+}
 .tl-step.on .tl-card {
   opacity: 1;
   transform: translateY(0);
