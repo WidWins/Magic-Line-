@@ -1003,7 +1003,7 @@ function GifDisplay() {
       />
       <div className="absolute left-3 top-3 flex h-6 items-center rounded-full border border-white/15 bg-black/50 px-2 text-white/85 backdrop-blur">
         <span
-          className="h-2 w-2 rounded-full animate-pulse"
+          className="h-2 w-2 rounded-full"
           style={{
             background: PURPLE_BRIGHT,
             boxShadow: `0 0 6px ${PURPLE}`,
