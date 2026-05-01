@@ -1,0 +1,365 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(0.08 0.02 280);
+  --foreground: oklch(0.98 0.005 280);
+  --neon-purple: oklch(0.65 0.28 300);
+  --neon-purple-bright: oklch(0.78 0.25 305);
+  --neon-purple-deep: oklch(0.45 0.3 295);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.129 0.042 264.695);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.129 0.042 264.695);
+  --primary: oklch(0.208 0.042 265.755);
+  --primary-foreground: oklch(0.984 0.003 247.858);
+  --secondary: oklch(0.968 0.007 247.896);
+  --secondary-foreground: oklch(0.208 0.042 265.755);
+  --muted: oklch(0.968 0.007 247.896);
+  --muted-foreground: oklch(0.554 0.046 257.417);
+  --accent: oklch(0.968 0.007 247.896);
+  --accent-foreground: oklch(0.208 0.042 265.755);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(0.929 0.013 255.508);
+  --input: oklch(0.929 0.013 255.508);
+  --ring: oklch(0.704 0.04 256.788);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.984 0.003 247.858);
+  --sidebar-foreground: oklch(0.129 0.042 264.695);
+  --sidebar-primary: oklch(0.208 0.042 265.755);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.968 0.007 247.896);
+  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
+  --sidebar-border: oklch(0.929 0.013 255.508);
+  --sidebar-ring: oklch(0.704 0.04 256.788);
+}
+
+.dark {
+  --background: oklch(0.129 0.042 264.695);
+  --foreground: oklch(0.984 0.003 247.858);
+  --card: oklch(0.208 0.042 265.755);
+  --card-foreground: oklch(0.984 0.003 247.858);
+  --popover: oklch(0.208 0.042 265.755);
+  --popover-foreground: oklch(0.984 0.003 247.858);
+  --primary: oklch(0.929 0.013 255.508);
+  --primary-foreground: oklch(0.208 0.042 265.755);
+  --secondary: oklch(0.279 0.041 260.031);
+  --secondary-foreground: oklch(0.984 0.003 247.858);
+  --muted: oklch(0.279 0.041 260.031);
+  --muted-foreground: oklch(0.704 0.04 256.788);
+  --accent: oklch(0.279 0.041 260.031);
+  --accent-foreground: oklch(0.984 0.003 247.858);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.551 0.027 264.364);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.208 0.042 265.755);
+  --sidebar-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.279 0.041 260.031);
+  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.551 0.027 264.364);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background:
+      radial-gradient(ellipse at top, oklch(0.18 0.08 290) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, oklch(0.12 0.06 280) 0%, transparent 60%),
+      var(--color-background);
+    color: var(--color-foreground);
+    min-height: 100vh;
+  }
+}
+
+@keyframes draw-line {
+  0% { stroke-dashoffset: 2000; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px oklch(0.65 0.28 300)) drop-shadow(0 0 16px oklch(0.45 0.3 295));
+    opacity: 0.95;
+  }
+  50% {
+    filter: drop-shadow(0 0 14px oklch(0.78 0.25 305)) drop-shadow(0 0 32px oklch(0.65 0.28 300));
+    opacity: 1;
+  }
+}
+
+@keyframes float-orb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20px, -30px) scale(1.05); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.neon-line {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation:
+    draw-line 5s ease-in-out infinite,
+    glow-pulse 3s ease-in-out infinite;
+  transition: stroke-width 0.4s ease;
+}
+
+.neon-line-wrap:hover .neon-line {
+  stroke-width: 4;
+  filter: drop-shadow(0 0 20px oklch(0.78 0.25 305)) drop-shadow(0 0 44px oklch(0.65 0.28 300));
+}
+
+.orb { animation: float-orb 9s ease-in-out infinite; }
+.fade-up { animation: fade-up 1s ease-out both; }
+
+/* Timeline */
+.tl-node.lit {
+  border-color: oklch(0.78 0.25 305);
+  color: oklch(0.95 0.15 305);
+  box-shadow:
+    0 0 0 6px oklch(0.78 0.25 305 / 0.08),
+    0 0 24px oklch(0.78 0.25 305 / 0.45);
+}
+.tl-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.tl-step.on .tl-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .tl-step {
+    min-height: auto !important;
+    padding: 1rem 0 !important;
+  }
+  .tl-step > div {
+    max-width: 100% !important;
+    margin: 0 !important;
+    flex-direction: row !important;
+    padding-left: 0;
+  }
+}
+
+/* TaskList row animation: cycles pending -> completed, staggered */
+@keyframes task-toggle {
+  /* 0-30%: pending state visible; 30-40%: transition; 40-100%: completed visible */
+  0%, 30%   { opacity: 1; transform: scale(1); }
+  35%       { opacity: 0; transform: scale(0.85); }
+  40%, 100% { opacity: 0; transform: scale(0.85); }
+}
+@keyframes task-toggle-in {
+  0%, 30%   { opacity: 0; transform: scale(0.7); }
+  40%       { opacity: 1; transform: scale(1.1); }
+  50%, 100% { opacity: 1; transform: scale(1); }
+}
+.tasklist-row .tasklist-pending,
+.tasklist-row .tasklist-date {
+  animation: task-toggle 3.6s ease-in-out infinite;
+  animation-delay: inherit;
+}
+..tasklist-row .tasklist-done,
+.tasklist-row .tasklist-completed {
+  opacity: 0;
+  animation: task-toggle-in 3.6s ease-in-out infinite;
+  animation-delay: inherit;
+}
+.tasklist-icon {
+  position: relative;
+}
+.tasklist-icon .tasklist-done {
+  left: 0;
+}
+.code-task-pending,
+.code-task-done {
+  transition: opacity .3s ease, transform .3s ease;
+}
+.code-task-pending.hidden,
+.code-task-done.hidden {
+  opacity: 0;
+  transform: scale(0.85);
+}
+.dollars-animate {
+  animation: dollars-rise 3.2s ease forwards;
+  opacity: 0.82;
+  transform: scale(0.98);
+}
+@keyframes dollars-rise {
+  from {
+    opacity: 0.82;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Search animation: magnifier sweeps L->R across docs, flipping their state */
+.search-anim-row { min-height: 2.25rem; }
+.search-doc { width: 1.75rem; height: 1.75rem; }
+.search-doc-dim,
+.search-doc-active,
+.search-doc-done { opacity: 0; }
+
+/*
+ * Total cycle = 9.8s. The magnifier sweeps left:0% -> left:100% over the
+ * 0% -> 92% portion of the cycle (see search-sweep below), i.e. ~9.016s of
+ * linear motion, then snaps back during the 92% -> 100% reset.
+ *
+ * 7 docs are laid out with flex justify-between, so doc i sits at i/6 of the
+ * row width. The magnifier center reaches doc i at clock time
+ *     t_i = (i / 6) * 9.016s
+ * To make every doc's keyframes line up with that moment, we delay each doc
+ * by t_i. The keyframes are written so that "active" peaks at local time 0,
+ * "done" takes over immediately after, and "dim" only appears during the
+ * brief reset window before the next sweep begins.
+ */
+.search-doc .search-doc-dim {
+  animation: sd-dim 9.8s linear infinite both;
+  animation-delay: calc(var(--i) * 1.503s);
+}
+.search-doc .search-doc-active {
+  animation: sd-active 9.8s linear infinite both;
+  animation-delay: calc(var(--i) * 1.503s);
+}
+.search-doc .search-doc-done {
+  animation: sd-done 9.8s linear infinite both;
+  animation-delay: calc(var(--i) * 1.503s);
+}
+
+/* Active window centered on local t = 0 (magnifier crossing the doc).
+   Window width ~6% of cycle ≈ 0.59s, split across the 0/100 wrap point. */
+@keyframes sd-active {
+  0%      { opacity: 1; }
+  3%      { opacity: 1; }
+  4%      { opacity: 0; }
+  97%     { opacity: 0; }
+  98%     { opacity: 1; }
+  100%    { opacity: 1; }
+}
+/* Done: appears right after the magnifier passes (~4%), holds until the
+   sweep resets near 92%, then fades out for the dim/reset gap. */
+@keyframes sd-done {
+  0%, 3%    { opacity: 0; }
+  4%        { opacity: 1; }
+  91%       { opacity: 1; }
+  92%, 100% { opacity: 0; }
+}
+/* Dim: only visible during the reset window (92% -> 97%), i.e. before the
+   magnifier reaches this doc on the next pass. */
+@keyframes sd-dim {
+  0%, 91%   { opacity: 0; }
+  92%       { opacity: 1; }
+  97%       { opacity: 1; }
+  98%, 100% { opacity: 0; }
+}
+
+/*
+ * Magnifier sweep — must be `linear` so the per-doc delays above (which assume
+ * uniform travel time) align exactly with when the magnifier center crosses
+ * each document.
+ */
+@keyframes search-sweep {
+  0%   { left: 0%;   opacity: 1; }
+  92%  { left: 100%; opacity: 1; }
+  95%  { left: 100%; opacity: 0; }
+  96%  { left: 0%;   opacity: 0; }
+  100% { left: 0%;   opacity: 1; }
+}
+.search-magnifier {
+  left: 0%;
+  transform: translate(-50%, -50%);
+  animation: search-sweep 9.8s linear infinite;
+}
+.search-shadow {
+  left: 0%;
+  transform: translateX(-50%);
+  opacity: 0.5;
+  animation: search-sweep 9.8s linear infinite;
+}
