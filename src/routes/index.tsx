@@ -578,9 +578,10 @@ function Card({ step }: { step: StepDef }) {
   const isTasks = step.extra === "tasks";
   const isCode = step.extra === "code";
   const isGif = step.extra === "gif";
+  const isChart = step.extra === "chart";
   const hideHeader = isTasks || isCode;
   return (
-    <div className={`tl-card relative w-full max-w-sm overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm ${isGif ? "no-animate" : ""}`}>
+    <div className={`tl-card relative w-full max-w-sm overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm ${(isGif || isChart) ? "no-animate" : ""}`}>
       <span
         aria-hidden
         className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[oklch(0.78_0.25_305)]/60 to-transparent"
